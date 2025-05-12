@@ -12,7 +12,9 @@ namespace Series_analyzer
                 Console.WriteLine(arg);
             }
 
+
             List <int> list_args = ConvertToIntList(args);
+            
             Menu(args);
         }
         static void Menu(string[] SeriesList)//Show to user the option and instructions
@@ -21,7 +23,7 @@ namespace Series_analyzer
             bool check_exit = true;
             do
             {
-                Colorprint("----------------------welcome-----------------------");
+                Colorprint("------------------------welcome---------------------------");
                 Console.WriteLine(
                     "\n Select the action you want to perform" +
                     "\n Press 1-- for Print the series in the order it was entered. " +
@@ -34,7 +36,7 @@ namespace Series_analyzer
 
 
                 string chose = Validate18();
-                Console.WriteLine( chose );
+                
 
                 switch (chose)
                 {
@@ -69,7 +71,19 @@ namespace Series_analyzer
         }
         static string Validate18()
         {
-            string validate_string_1_8 = Console.ReadLine();
+            bool chek =false;
+            string validate_string_1_8;
+            do
+            {
+                validate_string_1_8 = Console.ReadLine();
+                if (!(validate_string_1_8 == "1" || validate_string_1_8 == "2" || validate_string_1_8 == "3" || validate_string_1_8 == "4" || validate_string_1_8 == "5" || validate_string_1_8 == "6" || validate_string_1_8 == "7" || validate_string_1_8 == "8"))
+                {
+                    Colorprint("Invalid input, try again.");
+                    chek = true;
+                }
+            }while (chek);
+            Console.WriteLine(  chek);
+
 
 
             return validate_string_1_8;
@@ -98,6 +112,7 @@ namespace Series_analyzer
         }
         static void PrintInOrder(string[] sentence)     //1Print the series in the order it was entered
         {
+
             Console.WriteLine();
         }
         static void PrintReversOrder(string[] sentence) //2Print the series in the reversorder it was
