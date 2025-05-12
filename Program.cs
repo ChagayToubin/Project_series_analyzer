@@ -13,11 +13,11 @@ namespace Series_analyzer
             }
 
 
-            List <int> list_args = ConvertToIntList(args);
-            
-            Menu(args);
+            List<int> list_args = ConvertToIntList(args);
+
+            Menu(list_args);
         }
-        static void Menu(string[] SeriesList)//Show to user the option and instructions
+        static void Menu(List<int> SeriesList)//Show to user the option and instructions
         {
 
             bool check_exit = true;
@@ -32,22 +32,23 @@ namespace Series_analyzer
                     "\n Press 4--Print the max value in series " +
                     "\n Press 5--Print the min value in series " +
                     "\n Press 6--Print the average of the series  " +
-                    "\n Press 7--Print the some of the series \n Press 8=Exit");
+                    "\n Press 7--Print the some of the series " +
+                    "\n Press 8=Exit");
 
 
                 string chose = Validate18();
-                
+
 
                 switch (chose)
                 {
                     case "1":
-                        PrintInOrder(SeriesList);
+                        Print(PrintInOrder(SeriesList));
                         break;
                     case "2":
-                        PrintReversOrder(SeriesList);
+                        Print(ReversOrder(SeriesList));
                         break;
                     case "3":
-                        PrintSortOrder(SeriesList);
+                        Print(SortOrder(SeriesList));
                         break;
                     case "4":
                         FinfwMaximum(SeriesList);
@@ -65,25 +66,24 @@ namespace Series_analyzer
                         check_exit = false;
                         break;
 
-                } 
+                }
 
             } while (check_exit);
         }
         static string Validate18()
         {
-            bool chek =false;
+            bool chek = false;
             string validate_string_1_8;
             do
             {
                 validate_string_1_8 = Console.ReadLine();
+                chek = false;
                 if (!(validate_string_1_8 == "1" || validate_string_1_8 == "2" || validate_string_1_8 == "3" || validate_string_1_8 == "4" || validate_string_1_8 == "5" || validate_string_1_8 == "6" || validate_string_1_8 == "7" || validate_string_1_8 == "8"))
                 {
-                    Colorprint("Invalid input, try again.");
+                    Colorprint("Invalid input, try again.\n Only between 1 and 8");
                     chek = true;
                 }
-            }while (chek);
-            Console.WriteLine(  chek);
-
+            } while (chek);
 
 
             return validate_string_1_8;
@@ -100,8 +100,8 @@ namespace Series_analyzer
 
         }
 
-        
-      
+
+
         static void Colorprint(string sentence)        //Change color for emphasize the  sentence
         {
 
@@ -110,31 +110,38 @@ namespace Series_analyzer
             Console.ResetColor();
 
         }
-        static void PrintInOrder(string[] sentence)     //1Print the series in the order it was entered
+        static List<int> PrintInOrder(List<int> series)     //1Print the series in the order it was entered
         {
-
-            Console.WriteLine();
+            return series;
         }
-        static void PrintReversOrder(string[] sentence) //2Print the series in the reversorder it was
+        static List<int> ReversOrder(List<int> series) //2Print the series in the reversorder it was
         {
-            Console.WriteLine();
+            return null;
         }
-        static void PrintSortOrder(string[] sentence)  //3Print the series sort 
-        { }
+        static List<int> SortOrder(List<int> series)  //3Print the series sort 
+        {
+            return null;
+        }
 
-        static void FinfwMaximum(string[] sentence)     //4Print the max value in series
+        static void FinfwMaximum(List<int> series)     //4Print the max value in series
         { }
-        static void FindMin(string[] sentence)        //5Print the min value in series
+        static void FindMin(List<int> series)        //5Print the min value in series
         { }
-        static void Average(string[] sentence)                    //6Print the average of the series 
+        static void Average(List<int> series)                    //6Print the average of the series 
         { }
-        static void FindNumberOfElement(string[] sentence)//
+        static void FindNumberOfElement(List<int> series)//
         {
 
         }
-        static void ShowSumOfElment(string[] sentence)//7Print the some of the series 
+        static void ShowSumOfElment(List<int> series)//7Print the some of the series 
         {
 
+        }
+        static void Print(List<int> series)
+        {
+            foreach (int i in series)
+                Console.Write(i.ToString().PadLeft(5));
+            Console.WriteLine( );
         }
     }
 }
