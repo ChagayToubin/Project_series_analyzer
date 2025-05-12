@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace Series_analyzer
 {
@@ -10,14 +11,15 @@ namespace Series_analyzer
             {
                 Console.WriteLine(arg);
             }
+
+            List <int> list_args = ConvertToIntList(args);
             Menu(args);
         }
-        static void Menu(string [] SeriesList)//Show to user the option and instructions
+        static void Menu(string[] SeriesList)//Show to user the option and instructions
         {
 
-
             bool check_exit = true;
-            while (check_exit)
+            do
             {
                 Colorprint("----------------------welcome-----------------------");
                 Console.WriteLine(
@@ -28,12 +30,12 @@ namespace Series_analyzer
                     "\n Press 4--Print the max value in series " +
                     "\n Press 5--Print the min value in series " +
                     "\n Press 6--Print the average of the series  " +
-                    "\n Press 7--Print the some of the series ");
-                
+                    "\n Press 7--Print the some of the series \n Press 8=Exit");
 
-                
 
-                string chose = Console.ReadLine();
+                string chose = Validate18();
+                Console.WriteLine( chose );
+
                 switch (chose)
                 {
                     case "1":
@@ -48,27 +50,45 @@ namespace Series_analyzer
                     case "4":
                         FinfwMaximum(SeriesList);
                         break;
-                        case "5":
+                    case "5":
                         FindMin(SeriesList);
                         break;
-                        case "6":
-                        Average(SeriesList); 
+                    case "6":
+                        Average(SeriesList);
                         break;
                     case "7":
                         ShowSumOfElment(SeriesList);
-                            break;
+                        break;
+                    case "8":
+                        check_exit = false;
+                        break;
 
+                } 
 
-
-
-
-
-
-                }
-
-            }
+            } while (check_exit);
         }
-        static void Colorprint(string  sentence )        //Change color for emphasize the  sentence
+        static string Validate18()
+        {
+            string validate_string_1_8 = Console.ReadLine();
+
+
+            return validate_string_1_8;
+        }
+        static List<int> ConvertToIntList(string[] StringArry)
+        {
+            List<int> list = new List<int>();
+            for (int i = 0; i < StringArry.Length; i++)
+            {
+                list.Add(int.Parse(StringArry[i]));
+            }
+
+            return list;
+
+        }
+
+        
+      
+        static void Colorprint(string sentence)        //Change color for emphasize the  sentence
         {
 
             Console.ForegroundColor = ConsoleColor.Red;
@@ -99,7 +119,7 @@ namespace Series_analyzer
         }
         static void ShowSumOfElment(string[] sentence)//7Print the some of the series 
         {
-            
+
         }
     }
 }
