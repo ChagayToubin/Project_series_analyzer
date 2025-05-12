@@ -126,13 +126,11 @@ namespace Series_analyzer
 
             }
             return newlist;
-
-                
-
         }
         static List<int> SortOrder(List<int> series)  //3Print the series sort 
         {
-            return null;
+            series.Sort();
+            return series;
         }
 
         static void FinfwMaximum(List<int> series)     //4Print the max value in series
@@ -151,6 +149,11 @@ namespace Series_analyzer
             foreach (int i in series)
                 count++;
             return count;
+
+        }
+        static List<int> input()
+        {
+            return null;
 
         }
         static void Print(List<int> series)
