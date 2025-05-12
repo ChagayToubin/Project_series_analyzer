@@ -42,7 +42,7 @@ namespace Series_analyzer
                 switch (chose)
                 {
                     case "1":
-                        Print(PrintInOrder(SeriesList));
+                        Print(InOrder(SeriesList));
                         break;
                     case "2":
                         Print(ReversOrder(SeriesList));
@@ -110,13 +110,25 @@ namespace Series_analyzer
             Console.ResetColor();
 
         }
-        static List<int> PrintInOrder(List<int> series)     //1Print the series in the order it was entered
+        static List<int> InOrder(List<int> series)     //1Print the series in the order it was entered
         {
             return series;
         }
         static List<int> ReversOrder(List<int> series) //2Print the series in the reversorder it was
         {
-            return null;
+            List <int> newlist = new List<int>();
+           
+            int length = ShowSumOfElment(series);
+
+            for (int i = length-1; i >=0; i--)
+            {
+                newlist.Add(series[i]);
+
+            }
+            return newlist;
+
+                
+
         }
         static List<int> SortOrder(List<int> series)  //3Print the series sort 
         {
@@ -133,8 +145,12 @@ namespace Series_analyzer
         {
 
         }
-        static void ShowSumOfElment(List<int> series)//7Print the some of the series 
+        static int ShowSumOfElment(List<int> series)//7Print the some of the series 
         {
+            int count = 0;
+            foreach (int i in series)
+                count++;
+            return count;
 
         }
         static void Print(List<int> series)
@@ -142,6 +158,7 @@ namespace Series_analyzer
             foreach (int i in series)
                 Console.Write(i.ToString().PadLeft(5));
             Console.WriteLine( );
+
         }
     }
 }
