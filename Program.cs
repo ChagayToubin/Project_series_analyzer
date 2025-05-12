@@ -13,11 +13,11 @@ namespace Series_analyzer
             }
 
 
-            List<int> list_args = ConvertToIntList(args);
+            List<double> list_args = ConvertToIntList(args);
 
             Menu(list_args);
         }
-        static void Menu(List<int> SeriesList)//Show to user the option and instructions
+        static void Menu(List<double> SeriesList)//Show to user the option and instructions
         {
 
             bool check_exit = true;
@@ -51,10 +51,10 @@ namespace Series_analyzer
                         Print(SortOrder(SeriesList));
                         break;
                     case "4":
-                        FinfwMaximum(SeriesList);
+                        Console.WriteLine($"The max number is- { FindMax(SeriesList)}");
                         break;
                     case "5":
-                        FindMin(SeriesList);
+                        Console.WriteLine($"The max number is- {FindMin(SeriesList)}");
                         break;
                     case "6":
                         Average(SeriesList);
@@ -88,12 +88,12 @@ namespace Series_analyzer
 
             return validate_string_1_8;
         }
-        static List<int> ConvertToIntList(string[] StringArry)
+        static List<double> ConvertToIntList(string[] StringArry)
         {
-            List<int> list = new List<int>();
+            List<double> list = new List<double>();
             for (int i = 0; i < StringArry.Length; i++)
             {
-                list.Add(int.Parse(StringArry[i]));
+                list.Add(double.Parse(StringArry[i]));
             }
 
             return list;
@@ -110,15 +110,15 @@ namespace Series_analyzer
             Console.ResetColor();
 
         }
-        static List<int> InOrder(List<int> series)     //1Print the series in the order it was entered
+        static List<double> InOrder(List<double> series)     //1Print the series in the order it was entered
         {
             return series;
         }
-        static List<int> ReversOrder(List<int> series) //2Print the series in the reversorder it was
+        static List<double> ReversOrder(List<double> series) //2Print the series in the reversorder it was
         {
-            List <int> newlist = new List<int>();
-           
-            int length = ShowSumOfElment(series);
+            List <double> newlist = new List<double>();
+
+            int length = FindNumberOfElement(series);
 
             for (int i = length-1; i >=0; i--)
             {
@@ -127,23 +127,46 @@ namespace Series_analyzer
             }
             return newlist;
         }
-        static List<int> SortOrder(List<int> series)  //3Print the series sort 
+        static List<double> SortOrder(List<double> series)  //3 Return the series sort 
         {
             series.Sort();
             return series;
         }
 
-        static void FinfwMaximum(List<int> series)     //4Print the max value in series
-        { }
-        static void FindMin(List<int> series)        //5Print the min value in series
-        { }
-        static void Average(List<int> series)                    //6Print the average of the series 
-        { }
-        static void FindNumberOfElement(List<int> series)//
+        static double FindMax(List<double> series)     //4Find the max value in series
         {
 
+
+            double max = series[0]; 
+            for (int i = 0; i < FindNumberOfElement(series); i++)
+            {
+                if (max < series[i])
+                    max= series[i];
+            }
+            return max;
+
         }
-        static int ShowSumOfElment(List<int> series)//7Print the some of the series 
+        static double FindMin(List<double> series)        //5Find the min value in series
+        {
+            double min = series[0];
+            for (int i = 0; i < FindNumberOfElement(series); i++)
+            {
+                if (min > series[i])
+                    min = series[i];
+            }
+            return min;
+
+        }
+        static double Average(List<double> series)                    //6Print the average of the series 
+        {
+            double averge = 0;
+            foreach(int i in series)
+            {
+                averge += i;
+            }
+            return averge/FindNumberOfElement(series);
+        }
+        static int FindNumberOfElement(List<double> series)//
         {
             int count = 0;
             foreach (int i in series)
@@ -151,12 +174,24 @@ namespace Series_analyzer
             return count;
 
         }
-        static List<int> input()
+        static double ShowSumOfElment(List<double> series)//7Print the some of the series 
+        {
+            double count = 0;
+            foreach (double item in series)
+            {
+                count += item;
+
+            }
+            return count;
+          
+
+        }
+        static List<double> input()
         {
             return null;
 
         }
-        static void Print(List<int> series)
+        static void Print(List<double> series)
         {
             foreach (int i in series)
                 Console.Write(i.ToString().PadLeft(5));
