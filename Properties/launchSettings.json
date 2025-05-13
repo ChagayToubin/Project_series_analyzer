@@ -1,7 +1,8 @@
 {
   "profiles": {
     "Series_analyzer": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "569 87 87"
     }
   }
 }

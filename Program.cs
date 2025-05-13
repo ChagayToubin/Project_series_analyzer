@@ -6,13 +6,7 @@ namespace Series_analyzer
     internal class Program
     {
         static void Main(string[] args)
-        {
-
-
-
-           
-
-           
+        {          
             Menu(args);
         }
         static void Menu(string[] arg)//Show to user the option and instructions
@@ -24,7 +18,7 @@ namespace Series_analyzer
 
             if (!(Checked_if_all_positive_number_and3(arg1)))
             {
-                Colorprint("Please enter a value (nothing was entered in args or it was entered incorrectly");
+                Colorprint("Nothing was entered in args or it is an incorrect value)");
 
                 SeriesList = input();
             }
@@ -92,27 +86,10 @@ namespace Series_analyzer
 
                 } while (check_exit);
             }
-        static string Validate18()
-        {
-            bool chek = false;
-            string validate_string_1_8;
-            do
-            {
-                validate_string_1_8 = Console.ReadLine();
-                chek = false;
-                if (!(validate_string_1_8 == "1" || validate_string_1_8 == "2" || validate_string_1_8 == "3" || validate_string_1_8 == "4" || validate_string_1_8 == "5" || validate_string_1_8 == "6" || validate_string_1_8 == "7" || validate_string_1_8 == "8" || validate_string_1_8 == "0"))
-                {
-                    Colorprint("Invalid input, try again.\n Only between 1 and 8");
-                    chek = true;
-                }
-            } while (chek);
-
-
-            return validate_string_1_8;
-        }
+       
         static List<double> input()
         {
-            Console.WriteLine("Please enter positive numbers (no letters or characters) (Thank you) '~'");
+            Console.WriteLine("Please enter at least 3 Pםדן numbers (Thank you) '~'");
             string inpute_check = Console.ReadLine();
 
             bool number_ok;
@@ -121,13 +98,14 @@ namespace Series_analyzer
 
             while (!(number_ok))
             {
-                Colorprint("Invalid input, try again.\n Only positive number and at list 3 numbers");
+                Colorprint("Invalid input !!!\nEnter 3 numbers in the field Positive numbers");
 
                 inpute_check = Console.ReadLine();
                 number_ok = ((Checked_if_all_positive_number_and3(inpute_check)));
 
             }
             List<double> input_cleen = new List<double>();
+            Print(input_cleen);//
             input_cleen = ConvertToIntList(inpute_check);
 
             return input_cleen;
@@ -135,48 +113,29 @@ namespace Series_analyzer
 
 
         }
-        static bool Checked_if_all_positive_number_and3(string check_number)
-        {
-
-            string[] check = check_number.Split(' ', StringSplitOptions.RemoveEmptyEntries);//ללמודיותר שישי לי זמו מה זה בדיוק עושה
-            if (check.Length == 0)
-
-            {
-                return false;
-            }
-            foreach (string i in check)
-            {
-                if ((!double.TryParse(i, out double number)) || number < 0)
-                    return false;
-            }
-            return true;
-
-
-
-
-        }
-        static List<double> ConvertToIntList(object String_check)
+       
+        static List<double> ConvertToIntList(string String_check)
         {
             List<double> list = new List<double>();
 
-            if (String_check is string[] String_check1)//In case check args
-            {
-
-                for (int i = 0; i < String_check1.Length; i++)
-                {
-                    list.Add(double.Parse(String_check1[i]));
-                }
-            }
-            else if (String_check is string String_check2)
-            {
-                string[] StringArry = String_check2.Split(' ');
-                for (int i = 0; i < StringArry.Length; i++)
+            //if (String_check is string[] String_check1)//In case check args
+            //{
+            //    Console.WriteLine(  "dsjjk88888888888888888");
+            //    for (int i = 0; i < String_check1.Length; i++)
+            //    {
+            //        list.Add(double.Parse(String_check1[i]));
+            //    }
+            //}
+            //else if (String_check is string String_check2)
+            //{
+                string[] StringArry = String_check.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < StringArry.Length; i++)
                 {
                     list.Add(double.Parse(StringArry[i]));
                 }
 
 
-            }
+            //}
 
             return list;
 
@@ -269,7 +228,10 @@ namespace Series_analyzer
 
 
         }
-
+        /*get:List<double>
+         * set:null
+         * explain-:The function get a list and prints them.
+         */
         static void Print(List<double> series)
         {
             foreach (int i in series)
@@ -277,6 +239,46 @@ namespace Series_analyzer
             Console.WriteLine();
 
         }
+        //****************************************Validate Function*******************************
+        static bool Checked_if_all_positive_number_and3(string check_number)
+        {
+
+            string[] check = check_number.Split(' ', StringSplitOptions.RemoveEmptyEntries);//ללמודיותר שישי לי זמו מה זה בדיוק עושה
+            if (check.Length < 3)
+
+            {
+                return false;
+            }
+            foreach (string i in check)
+            {
+                if ((!double.TryParse(i, out double number)) || number < 0)
+                    return false;
+            }
+
+            return true;
+
+        }
+        static string Validate18()
+        {
+            bool chek = false;
+            string validate_string_1_8;
+            do
+            {
+                validate_string_1_8 = Console.ReadLine();
+                chek = false;
+                if (!(validate_string_1_8 == "1" || validate_string_1_8 == "2" || validate_string_1_8 == "3" || validate_string_1_8 == "4" || validate_string_1_8 == "5" || validate_string_1_8 == "6" || validate_string_1_8 == "7" || validate_string_1_8 == "8" || validate_string_1_8 == "0"))
+                {
+                    Colorprint("Invalid input, try again.\n Only between 1 and 8");
+                    chek = true;
+                }
+            } while (chek);
+
+
+            return validate_string_1_8;
+        }
+
+
+
     }
 }
 
