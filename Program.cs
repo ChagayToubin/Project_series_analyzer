@@ -95,7 +95,7 @@ namespace Series_analyzer
          */
         static List<double> input()
         {
-            Console.WriteLine("Please enter at least 3 Pםדן numbers (Thank you) '~'");
+            Console.WriteLine("Please enter at least 3 Positive numbers (Thank you) '~'");
             string inpute_check = Console.ReadLine();
 
             bool number_ok;
@@ -174,19 +174,17 @@ namespace Series_analyzer
          *set:     List arranged in ascending order
          *explain: Sort the list and send it.
          */
-        static List<double> SortOrder(List<double> series)
+        static List<double> SortOrder(List<double> series1)
         {
-         
-
-
+            List<double>series=new List<double>(series1);
             int length = FindNumberOfElement(series);
             bool check_order;           
             for (int i = 0;i<length;i++)
             {
                 check_order = false;
-                for (int j = 0;j<length-i-1;i++)
+                for (int j = 0;j<length-i-1;j++)
                 {
-                    if (series[i] > series[j + 1])
+                    if (series[j] > series[j + 1])
                     {
 
                         
