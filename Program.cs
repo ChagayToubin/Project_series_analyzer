@@ -5,15 +5,20 @@ namespace Series_analyzer
 {
     internal class Program
     {
+
         static void Main(string[] args)
         {
             Menu(args);
         }
-        static void Menu(string[] arg)//Show to user the option and instructions
+        /*get:arry of strings
+         * set:-
+         * explain:"The function checks whether the array has at least three positive numbers.
+         * If not, it sends to the inpute function. 
+         * Then, it asks the user to choose an action."
+         */
+        static void Menu(string[] arg)
         {
             List<double> SeriesList;
-
-
             string arg1 = string.Join(" ", arg);
 
             if (!(Checked_if_all_positive_number_and3(arg1)))
@@ -28,10 +33,7 @@ namespace Series_analyzer
             }
 
 
-
-
             bool check_exit = true;
-
 
             do
             {
@@ -48,9 +50,7 @@ namespace Series_analyzer
                     "\n Press 7--Print the some of the series " +
                     "\n Press 8=Exit");
 
-
                 string chose = Validate18();
-
 
                 switch (chose)
                 {
@@ -81,12 +81,18 @@ namespace Series_analyzer
                     case "8":
                         check_exit = false;
                         break;
-
                 }
 
             } while (check_exit);
         }
-
+        /*get:-
+         *set:List<double>
+         *explain:A function asks for input
+         *, then checks if it is valid by sending it to a validation function.
+         *If the input is invalid, it asks again. 
+         *If the input is valid, it converts the input to a list and 
+         *returns the list.
+         */
         static List<double> input()
         {
             Console.WriteLine("Please enter at least 3 Pםדן numbers (Thank you) '~'");
@@ -105,13 +111,13 @@ namespace Series_analyzer
 
             }
             List<double> input_cleen = new List<double>();
-            Print(input_cleen);//
+            Print(input_cleen);
             input_cleen = ConvertDoubleList(inpute_check);
 
             return input_cleen;
 
         }
-        /*get:      string sentence
+        /* get:     string sentence
          * set:     list<double>
          * explain: Convert from string to list
          * 
@@ -123,7 +129,7 @@ namespace Series_analyzer
             for (int i = 0; i < StringArry.Length; i++)
             {
                 list.Add(double.Parse(StringArry[i]));
-            }   
+            }
             return list;
 
         }
@@ -132,7 +138,7 @@ namespace Series_analyzer
          *explian:get a sentence and prints it in red
          * 
          */
-        static void Colorprint(string sentence)        
+        static void Colorprint(string sentence)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(sentence);
@@ -143,7 +149,7 @@ namespace Series_analyzer
          *set:   List<double>
          *explain:return the series in the order it was enter
          */
-        static List<double> InOrder(List<double> series)     
+        static List<double> InOrder(List<double> series)
         {
             return series;
         }
@@ -151,7 +157,7 @@ namespace Series_analyzer
          *Set:     reverse list
          *explain: Reverses the order of the list and sends it.
             */
-        static List<double> ReversOrder(List<double> series) 
+        static List<double> ReversOrder(List<double> series)
         {
             List<double> newlist = new List<double>();
 
@@ -168,17 +174,43 @@ namespace Series_analyzer
          *set:     List arranged in ascending order
          *explain: Sort the list and send it.
          */
-        static List<double> SortOrder(List<double> series)  
+        static List<double> SortOrder(List<double> series)
         {
-            List<double> copy = new List<double>(series);
-            copy.Sort();
-            return copy;
+         
+
+
+            int length = FindNumberOfElement(series);
+            bool check_order;           
+            for (int i = 0;i<length;i++)
+            {
+                check_order = false;
+                for (int j = 0;j<length-i-1;i++)
+                {
+                    if (series[i] > series[j + 1])
+                    {
+
+                        
+                        check_order = true;
+                        
+                        double temp=series[j];
+                        series[j]=series[1+j];
+                        series[j+1]=temp;
+                    }
+                }
+                if (!check_order)
+                {
+                    break;
+                }
+            }
+            
+            return series;
+
         }
         /*get:      List<double>
          *set:      The max number
          *explain:  Find the min value in series and send it 
          */
-        static double FindMax(List<double> series)     
+        static double FindMax(List<double> series)
         {
             double max = series[0];
             for (int i = 0; i < FindNumberOfElement(series); i++)
@@ -255,6 +287,12 @@ namespace Series_analyzer
 
         }
         //****************************************Validate Function*******************************
+
+        /*
+         *get:     string
+         *set :    bool
+         *explain: Checks if all numbers are positive
+         */
         static bool Checked_if_all_positive_number_and3(string check_number)
         {
 
@@ -273,6 +311,10 @@ namespace Series_analyzer
             return true;
 
         }
+        /*get:-
+         * set:string
+         * explain:Makes sure all numbers are 0 to 8
+         */
         static string Validate18()
         {
             bool chek = false;
