@@ -7,69 +7,91 @@ namespace Series_analyzer
     {
         static void Main(string[] args)
         {
-            foreach (string arg in args)
+
+
+
+           
+
+           
+            Menu(args);
+        }
+        static void Menu(string[] arg)//Show to user the option and instructions
+        {
+            List<double> SeriesList;
+
+            
+            string arg1 = string.Join(" ", arg);
+
+            if (!(Checked_if_all_positive_number_and3(arg1)))
             {
-                Console.WriteLine(arg);
+                Colorprint("Please enter a value (nothing was entered in args or it was entered incorrectly");
+
+                SeriesList = input();
+            }
+            else
+            {
+                SeriesList = ConvertToIntList(arg1);
             }
 
+                 
 
-            List<double> list_args = ConvertToIntList(args);
-
-            Menu(list_args);
-        }
-        static void Menu(List<double> SeriesList)//Show to user the option and instructions
-        {
 
             bool check_exit = true;
-            do
-            {
-                Colorprint("------------------------welcome---------------------------");
-                Console.WriteLine(
-                    "\n Select the action you want to perform" +
-                    "\n Press 1-- for Print the series in the order it was entered. " +
-                    "\n press 2--Print the series in the reversorder it was " +
-                    "\n Press 3--Print the series sort." +
-                    "\n Press 4--Print the max value in series " +
-                    "\n Press 5--Print the min value in series " +
-                    "\n Press 6--Print the average of the series  " +
-                    "\n Press 7--Print the some of the series " +
-                    "\n Press 8=Exit");
 
-
-                string chose = Validate18();
-
-
-                switch (chose)
+            
+                do
                 {
-                    case "1":
-                        Print(InOrder(SeriesList));
-                        break;
-                    case "2":
-                        Print(ReversOrder(SeriesList));
-                        break;
-                    case "3":
-                        Print(SortOrder(SeriesList));
-                        break;
-                    case "4":
-                        Console.WriteLine($"The max number is- { FindMax(SeriesList)}");
-                        break;
-                    case "5":
-                        Console.WriteLine($"The max number is- {FindMin(SeriesList)}");
-                        break;
-                    case "6":
-                        Average(SeriesList);
-                        break;
-                    case "7":
-                        ShowSumOfElment(SeriesList);
-                        break;
-                    case "8":
-                        check_exit = false;
-                        break;
+                    Colorprint("------------------------welcome---------------------------");
+                    Console.WriteLine(
+                        "\n Select the action you want to perform" +
+                        "\n press 0--To insert a new series (or replace the existing series)" +
+                        "\n Press 1--For Print the series in the order it was entered. " +
+                        "\n press 2--Print the series in the reversorder it was " +
+                        "\n Press 3--Print the series sort." +
+                        "\n Press 4--Print the max value in series " +
+                        "\n Press 5--Print the min value in series " +
+                        "\n Press 6--Print the average of the series  " +
+                        "\n Press 7--Print the some of the series " +
+                        "\n Press 8=Exit");
 
-                }
 
-            } while (check_exit);
-        }
+                    string chose = Validate18();
+
+
+                    switch (chose)
+                    {
+                        case "0":
+                            SeriesList = input();
+                            break;
+                        case "1":
+                            Print(InOrder(SeriesList));
+                            break;
+                        case "2":
+                            Print(ReversOrder(SeriesList));
+                            break;
+                        case "3":
+                            Print(SortOrder(SeriesList));
+                            break;
+                        case "4":
+                            Console.WriteLine($"The max number is- {FindMax(SeriesList)}");
+                            break;
+                        case "5":
+                            Console.WriteLine($"The min number is- {FindMin(SeriesList)}");
+                            break;
+                        case "6":
+                            Console.WriteLine(Average(SeriesList));
+                            break;
+                        case "7":
+                            Console.WriteLine(ShowSumOfElment(SeriesList));
+                            break;
+                        case "8":
+                            check_exit = false;
+                            break;
+
+                    }
+
+                } while (check_exit);
+            }
         static string Validate18()
         {
             bool chek = false;
@@ -78,7 +100,7 @@ namespace Series_analyzer
             {
                 validate_string_1_8 = Console.ReadLine();
                 chek = false;
-                if (!(validate_string_1_8 == "1" || validate_string_1_8 == "2" || validate_string_1_8 == "3" || validate_string_1_8 == "4" || validate_string_1_8 == "5" || validate_string_1_8 == "6" || validate_string_1_8 == "7" || validate_string_1_8 == "8"))
+                if (!(validate_string_1_8 == "1" || validate_string_1_8 == "2" || validate_string_1_8 == "3" || validate_string_1_8 == "4" || validate_string_1_8 == "5" || validate_string_1_8 == "6" || validate_string_1_8 == "7" || validate_string_1_8 == "8" || validate_string_1_8 == "0"))
                 {
                     Colorprint("Invalid input, try again.\n Only between 1 and 8");
                     chek = true;
@@ -88,12 +110,72 @@ namespace Series_analyzer
 
             return validate_string_1_8;
         }
-        static List<double> ConvertToIntList(string[] StringArry)
+        static List<double> input()
+        {
+            Console.WriteLine("Please enter positive numbers (no letters or characters) (Thank you) '~'");
+            string inpute_check = Console.ReadLine();
+
+            bool number_ok;
+
+            number_ok = Checked_if_all_positive_number_and3(inpute_check);
+
+            while (!(number_ok))
+            {
+                Colorprint("Invalid input, try again.\n Only positive number and at list 3 numbers");
+
+                inpute_check = Console.ReadLine();
+                number_ok = ((Checked_if_all_positive_number_and3(inpute_check)));
+
+            }
+            List<double> input_cleen = new List<double>();
+            input_cleen = ConvertToIntList(inpute_check);
+
+            return input_cleen;
+
+
+
+        }
+        static bool Checked_if_all_positive_number_and3(string check_number)
+        {
+
+            string[] check = check_number.Split(' ', StringSplitOptions.RemoveEmptyEntries);//ללמודיותר שישי לי זמו מה זה בדיוק עושה
+            if (check.Length == 0)
+
+            {
+                return false;
+            }
+            foreach (string i in check)
+            {
+                if ((!double.TryParse(i, out double number)) || number < 0)
+                    return false;
+            }
+            return true;
+
+
+
+
+        }
+        static List<double> ConvertToIntList(object String_check)
         {
             List<double> list = new List<double>();
-            for (int i = 0; i < StringArry.Length; i++)
+
+            if (String_check is string[] String_check1)//In case check args
             {
-                list.Add(double.Parse(StringArry[i]));
+
+                for (int i = 0; i < String_check1.Length; i++)
+                {
+                    list.Add(double.Parse(String_check1[i]));
+                }
+            }
+            else if (String_check is string String_check2)
+            {
+                string[] StringArry = String_check2.Split(' ');
+                for (int i = 0; i < StringArry.Length; i++)
+                {
+                    list.Add(double.Parse(StringArry[i]));
+                }
+
+
             }
 
             return list;
@@ -116,11 +198,11 @@ namespace Series_analyzer
         }
         static List<double> ReversOrder(List<double> series) //2Print the series in the reversorder it was
         {
-            List <double> newlist = new List<double>();
+            List<double> newlist = new List<double>();
 
             int length = FindNumberOfElement(series);
 
-            for (int i = length-1; i >=0; i--)
+            for (int i = length - 1; i >= 0; i--)
             {
                 newlist.Add(series[i]);
 
@@ -129,19 +211,20 @@ namespace Series_analyzer
         }
         static List<double> SortOrder(List<double> series)  //3 Return the series sort 
         {
-            series.Sort();
-            return series;
+            List<double> copy = new List<double>(series);
+            copy.Sort();
+            return copy;
         }
 
         static double FindMax(List<double> series)     //4Find the max value in series
         {
 
 
-            double max = series[0]; 
+            double max = series[0];
             for (int i = 0; i < FindNumberOfElement(series); i++)
             {
                 if (max < series[i])
-                    max= series[i];
+                    max = series[i];
             }
             return max;
 
@@ -160,11 +243,11 @@ namespace Series_analyzer
         static double Average(List<double> series)                    //6Print the average of the series 
         {
             double averge = 0;
-            foreach(int i in series)
+            foreach (int i in series)
             {
                 averge += i;
             }
-            return averge/FindNumberOfElement(series);
+            return averge / FindNumberOfElement(series);
         }
         static int FindNumberOfElement(List<double> series)//
         {
@@ -183,20 +266,17 @@ namespace Series_analyzer
 
             }
             return count;
-          
+
 
         }
-        static List<double> input()
-        {
-            return null;
 
-        }
         static void Print(List<double> series)
         {
             foreach (int i in series)
                 Console.Write(i.ToString().PadLeft(5));
-            Console.WriteLine( );
+            Console.WriteLine();
 
         }
     }
 }
+
