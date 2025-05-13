@@ -48,7 +48,8 @@ namespace Series_analyzer
                     "\n Press 5--Print the min value in series " +
                     "\n Press 6--Print the average of the series  " +
                     "\n Press 7--Print the some of the series " +
-                    "\n Press 8=Exit");
+                    "\n Press 8=Exit"+
+                    "\n ----------------------------------------------------------------");
 
                 string chose = Validate18();
 
@@ -82,6 +83,10 @@ namespace Series_analyzer
                         check_exit = false;
                         break;
                 }
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadKey();
+                Console.Clear();
+
 
             } while (check_exit);
         }
